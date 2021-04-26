@@ -17,6 +17,5 @@ public class Board {
 	}
 	
 	public static void main (String[] args) {
-		updateGrid('b', 1);
 	}
 }
