@@ -9,9 +9,8 @@ public class Board {
 	public void updateGrid(char x, int y) {
 		// converting char ascii into integer 1-8
 		int charAscii = x;
-		charAscii -= 96;
-		System.out.println(charAscii);
-		
+		charAscii -= 97;
+		y--;
 		// 0 = empty, not hit
 		// 1 = empty, hit
 		// 2 = occupied, not hit
@@ -21,7 +20,7 @@ public class Board {
 		if (this.grid[charAscii][y] == 0 || this.grid[charAscii][y] == 2) {
 			this.grid[charAscii][y]++;
 		}
-		
+		// Observer that notifies the view whenever changes occur to the model
 		View.printGrid(grid);
 	}
 
