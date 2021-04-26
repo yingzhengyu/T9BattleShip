@@ -1,3 +1,6 @@
+package model;
+
+
 import javax.swing.JButton;
 import java.util.ArrayList;
 public class ButtonLayout {
