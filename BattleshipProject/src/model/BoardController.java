@@ -11,7 +11,7 @@ public class BoardController {
 		this.model = model;
 		this.view = view;
 	}
-	
+	// Calls updateGrid from Board class to update the model, observer automatically updates the view
 	public void action(char x, int y) {
 		model.updateGrid(x, y);
 	}

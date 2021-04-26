@@ -10,7 +10,8 @@ public class Board {
 		// converting char ascii into integer 1-8
 		int charAscii = x;
 		charAscii -= 97;
-		y--;
+		y--; 	// incrementing y to correct position on grid
+		
 		// 0 = empty, not hit
 		// 1 = empty, hit
 		// 2 = occupied, not hit
@@ -26,8 +27,5 @@ public class Board {
 
 	public int[][] getGrid() {
 		return this.grid;
-	}
-	
-	public static void main (String[] args) {
 	}
 }
