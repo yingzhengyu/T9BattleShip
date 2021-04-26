@@ -1,6 +1,6 @@
 package controller;
 
-public class TileMessage {
+public class TileMessage implements Message{
 	char x;
 	int y;
 	public TileMessage(char x, int y) {

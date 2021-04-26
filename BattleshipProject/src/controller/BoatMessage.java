@@ -1,6 +1,6 @@
 package controller;
 
-public class BoatMessage {
+public class BoatMessage implements Message{
 	int[] fourTiltBoat = new int [3]; // 0,1,2,3 element so health is 4
 	int[] fiveTiltBoat = new int [4];
 	
