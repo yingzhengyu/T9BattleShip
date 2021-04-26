@@ -1,5 +1,7 @@
 package model;
 
+import view.View;
+
 public class Board {
 	
 	int[][] grid = new int[8][8];
@@ -19,6 +21,8 @@ public class Board {
 		if (this.grid[charAscii][y] == 0 || this.grid[charAscii][y] == 2) {
 			this.grid[charAscii][y]++;
 		}
+		
+		View.printGrid(grid);
 	}
 
 	public int[][] getGrid() {
