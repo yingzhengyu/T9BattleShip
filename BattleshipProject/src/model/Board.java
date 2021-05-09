@@ -4,7 +4,7 @@ import view.View;
 
 public class Board {
 	
-	int[][] grid = new int[8][8];
+	private Tile[][] grid = new Tile[8][8];
 	
 	public void updateGrid(char x, int y) {
 		// converting char ascii into integer 1-8
@@ -17,15 +17,15 @@ public class Board {
 		// 2 = occupied, not hit
 		// 3 = occupied, hit
 
-		// if the tile has not been hit, we change the status to hit by adding one
-		if (this.grid[charAscii][y] == 0 || this.grid[charAscii][y] == 2) {
-			this.grid[charAscii][y]++;
-		}
-		// Observer that notifies the view whenever changes occur to the model
-		View.printGrid(grid);
+//		// if the tile has not been hit, we change the status to hit by adding one
+//		if (this.grid[charAscii][y] == 0 || this.grid[charAscii][y] == 2) {
+//			this.grid[charAscii][y]++;
+//		}
+//		// Observer that notifies the view whenever changes occur to the model
+//		View.printGrid(grid);
 	}
 
-	public int[][] getGrid() {
+	public Tile[][] getGrid() {
 		return this.grid;
 	}
 }

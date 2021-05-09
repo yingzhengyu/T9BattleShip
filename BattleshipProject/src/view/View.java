@@ -1,24 +1,37 @@
 package view;
  
+import java.awt.GridLayout;
+import java.util.concurrent.*;
+import javax.swing.*;
+import controller.Message;
 import model.Board;
-public class View {
+import model.Tile;
+public class View extends JFrame {
 	// Stores a grid of integers to represent the game board
-	int[][] grid = new int[8][8];
+	Tile[][] grid = new Tile[8][8];
+	JPanel panel = new JPanel();
+	BlockingQueue<Message> queue;
 	
-	public static void printGrid(int[][] grid) {
-		// iterates over every element of the array and prints with proper formatting 
-		for (int i = 0; i < grid.length; i++) {
-			for (int j = 0; j < grid[i].length; j++) {
-				System.out.print(grid[i][j] + " ");
-			}
-			System.out.println("");
-		}
-		System.out.println("");
+	public View(BlockingQueue<Message> queue) {
+		this.queue = queue;
+		
+		buildGrid();
 	}
 	
-	
-	public static void main (String[] args) {
-		printGrid(new int[8][8]);
+	private void buildGrid() {
+		this.setSize(1000, 1000);
+		this.setResizable(false);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.panel.setLayout(new GridLayout(8,8));
+		
+		for (int i = 0; i <= 7; i++) {
+			for (int j = 0; j <= 7; j++) {
+				grid[i][j] = new Tile();
+				panel.add(grid[i][j]);
+			}
+		}
+		this.add(panel);
+		this.setVisible(true);
 	}
 
 }
