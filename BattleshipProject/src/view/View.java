@@ -31,7 +31,7 @@ public class View extends JFrame {
 		
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
-				grid[i][j] = new Tile();
+				grid[i][j] = new Tile(this.queue);
 				leftPanel.add(grid[i][j]);
 			}
 		}
@@ -41,7 +41,7 @@ public class View extends JFrame {
 		
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
-				grid[i][j] = new Tile();
+				grid[i][j] = new Tile(this.queue);
 				rightPanel.add(grid[i][j]);
 			}
 		}

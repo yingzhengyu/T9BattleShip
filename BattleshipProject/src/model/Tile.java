@@ -1,30 +1,79 @@
 package model;
 
 import java.awt.event.*;
+import java.util.concurrent.BlockingQueue;
 
 import javax.swing.*;
 
+import controller.AttackMessage;
+import controller.Message;
+
 public class Tile extends JButton implements ActionListener {
-	
+
 	ImageIcon redHitIcon;
 	ImageIcon blackHitIcon;
-	int state = 0;
+	BlockingQueue<Message> queue;
 
-	public Tile() {
+	TileState state = TileState.EMPTY_NOT_HIT; // default state
+
+	public Tile(BlockingQueue<Message> queue) {
+		this.queue = queue;
 		redHitIcon = new ImageIcon(".\\Images\\redx.png");
 		blackHitIcon = new ImageIcon(".\\Images\\blackx.png");
-		this.setIcon(redHitIcon);
+		this.setIcon(blackHitIcon);
 		this.addActionListener(this);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (this.getIcon() == redHitIcon) {
-			this.setIcon(blackHitIcon);
+		// test, just flips the colors back and forth on button press
+		//		if (this.getIcon() == redHitIcon) {
+		//			this.setIcon(blackHitIcon);
+		//		}
+		//		else if (this.getIcon() == blackHitIcon){
+		//			this.setIcon(redHitIcon);
+		//		}
+		try {
+			Message message = new AttackMessage(this);
+			queue.put(message);
 		}
-		else if (this.getIcon() == blackHitIcon){
-			this.setIcon(redHitIcon);
+		catch (InterruptedException exception) {
+			exception.printStackTrace();
 		}
 	}
 
+	public void setTileState(TileState newState) {
+		this.state = newState;
+		this.updateIcon(newState);
+	}
+
+	public TileState getTileState() {
+		return this.state;
+	}
+
+	// called when this tile is attacked
+	public TileState attacked() {
+		switch (state) {
+		case EMPTY_NOT_HIT:
+			this.setTileState(TileState.EMPTY_HIT);
+			break;
+
+		case OCCUPIED_NOT_HIT:
+			this.setTileState(TileState.OCCUPIED_HIT);
+			break;
+		}
+		return this.state;
+	}
+
+	public void updateIcon(TileState currentState) {
+		switch (currentState) {
+		case EMPTY_NOT_HIT:
+			this.setIcon(blackHitIcon);
+			break;
+
+		case EMPTY_HIT:
+			this.setIcon(redHitIcon);
+			break;
+		}
+	}
 }
