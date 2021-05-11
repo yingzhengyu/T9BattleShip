@@ -1,5 +1,5 @@
 package view;
- 
+
 import java.awt.GridLayout;
 import java.util.concurrent.*;
 import javax.swing.*;
@@ -14,38 +14,57 @@ public class View extends JFrame implements Window {
 	JPanel leftPanel = new JPanel();
 	JPanel rightPanel = new JPanel();
 	BlockingQueue<Message> queue;
-	
+
 	public View(BlockingQueue<Message> queue) {
 		this.queue = queue;
-		
+
 		this.setSize(1400, 1000);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+
 		buildGrids();
+		this.hideGrid(1);
 		this.setVisible(true);
 	}
-	
-	public void hideGrid(Tile[][] grid) {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				grid[i][j].hide();
+
+	public void hideGrid(int currentPlayer) {
+		if (currentPlayer == 1 ) {
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					rightGrid[i][j].hide();
+				}
+			}
+		}
+		else if (currentPlayer == 2) {
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					leftGrid[i][j].hide();
+				}
 			}
 		}
 	}
-	
-	public void revealGrid(Tile[][] grid) {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				grid[i][j].reveal();
+
+	public void revealGrid(int currentPlayer) {
+		if (currentPlayer == 1) {
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					leftGrid[i][j].reveal();
+				}
+			}
+		}
+		else if (currentPlayer == 2) {
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					rightGrid[i][j].reveal();
+				}
 			}
 		}
 	}
-	
+
 	private void buildGrids() {
 
 		this.leftPanel.setLayout(new GridLayout(8,8,5,5));
-		
+
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
 				leftGrid[i][j] = new Tile(this.queue);
@@ -53,9 +72,9 @@ public class View extends JFrame implements Window {
 			}
 		}
 		this.outerPanel.add(leftPanel);
-		
+
 		this.rightPanel.setLayout(new GridLayout(8,8,5,5));
-		
+
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
 				rightGrid[i][j] = new Tile(this.queue);
@@ -63,7 +82,7 @@ public class View extends JFrame implements Window {
 			}
 		}
 		this.outerPanel.add(rightPanel);
-		
+
 		this.add(this.outerPanel);
 	}
 

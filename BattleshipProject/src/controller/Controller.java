@@ -39,9 +39,14 @@ public class Controller {
 				controller.mainLoop();
 			}
 			else if (message.getClass() == AttackMessage.class) {
+				View view = (View) window;
 				AttackMessage attackMessage = (AttackMessage) message;
 				Tile tile = attackMessage.getTile();
 				tile.attacked();
+				
+				this.gameboard.updateCurrentPlayer();
+				view.hideGrid(gameboard.getCurrentPlayer());
+				view.revealGrid(gameboard.getCurrentPlayer());
 			}
 		}
 	}

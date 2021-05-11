@@ -78,6 +78,7 @@ public class Tile extends JButton implements ActionListener {
 		case EMPTY_HIT:
 			this.setIcon(redHitIcon);
 			break;
+			
 		case HIDDEN:
 			this.setIcon(blankIcon);
 		}
@@ -91,7 +92,6 @@ public class Tile extends JButton implements ActionListener {
 	}
 
 	public void reveal() {
-		this.state = this.placeholderState;
-		this.updateIcon(this.state);
+		this.setTileState(placeholderState);
 	}
 }
