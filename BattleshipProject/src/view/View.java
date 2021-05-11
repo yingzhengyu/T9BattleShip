@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.concurrent.*;
 import javax.swing.*;
@@ -9,10 +12,13 @@ import model.Tile;
 import model.TileState;
 public class View extends JFrame implements Window {
 	// Stores a grid of integers to represent the game board
+	int currentPlayer = 1;
+	JButton switchButton = new JButton("next");
 	Tile[][] leftGrid = new Tile[8][8];
 	Tile[][] rightGrid = new Tile[8][8];
 	JPanel outerPanel = new JPanel(new GridLayout(1,2,60,5));
 	JPanel leftPanel = new JPanel();
+	JPanel middlePanel = new JPanel();
 	JPanel rightPanel = new JPanel();
 	BlockingQueue<Message> queue;
 
@@ -23,9 +29,27 @@ public class View extends JFrame implements Window {
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+		switchButton.addActionListener(e1 ->{
+			if(currentPlayer == 1) {
+				hideGrid(1);
+				//setVisible(false);
+				JOptionPane.showMessageDialog(null, "Player2's turn","SWITCH",JOptionPane.INFORMATION_MESSAGE);
+				//this.setVisible(true);
+				revealGrid(2);
+				currentPlayer = 2;
+			}else {
+				hideGrid(2);
+				JOptionPane.showMessageDialog(null, "Player1's turn","SWITCH",JOptionPane.INFORMATION_MESSAGE);
+				revealGrid(1);
+				currentPlayer = 1;
+
+			}
+			
+		});
+
 		buildGrids();
 		// player 1 is active player on turn one 
-		this.hideGrid(1);
+//		this.hideGrid(1);
 		this.setVisible(true);
 	}
 
@@ -112,6 +136,9 @@ public class View extends JFrame implements Window {
 			}
 		}
 		this.outerPanel.add(leftPanel);
+		
+		
+		middlePanel.add(switchButton);
 
 		this.rightPanel.setLayout(new GridLayout(8,8,5,5));
 
@@ -130,6 +157,7 @@ public class View extends JFrame implements Window {
 				rightPanel.add(rightGrid[i][j]);
 			}
 		}
+		this.outerPanel.add(switchButton);
 		this.outerPanel.add(rightPanel);
 
 		this.add(this.outerPanel);
