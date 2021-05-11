@@ -6,7 +6,7 @@ import javax.swing.*;
 import controller.Message;
 import model.Board;
 import model.Tile;
-public class View extends JFrame {
+public class View extends JFrame implements Window {
 	// Stores a grid of integers to represent the game board
 	Tile[][] grid = new Tile[8][8];
 	JPanel outerPanel = new JPanel(new GridLayout(1,2,60,5));

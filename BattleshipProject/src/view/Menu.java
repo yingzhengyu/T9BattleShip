@@ -1,9 +1,14 @@
 package view;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class Menu extends JFrame {
+import controller.Message;
+import controller.StartMessage;
+
+import java.awt.*;
+import java.util.concurrent.BlockingQueue;
+
+public class Menu extends JFrame implements Window{
 
     JButton start = new JButton("Start");
     JButton setting = new JButton("Setting");
@@ -13,7 +18,7 @@ public class Menu extends JFrame {
     JLabel textfield = new JLabel();
     GridBagConstraints gbc = new GridBagConstraints();
 
-    public Menu(){
+    public Menu(BlockingQueue<Message> queue){
 
         this.setSize(1280,720);
         this.setVisible(true);
@@ -38,13 +43,13 @@ public class Menu extends JFrame {
 
         start.setFont(new Font("Ink Free", Font.PLAIN, 50));
         start.setBounds(0,0,200,100);
-//        start.addActionListener(e -> {
-//            try {
-//                queue.put(new StartMessage());
-//            } catch (InterruptedException exception) {
-//                // do nothing
-//            }
-//        });
+        start.addActionListener(e -> {
+            try {
+                queue.put(new StartMessage(queue));
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+        });
 
         setting.setFont(new Font("Ink Free", Font.PLAIN, 50));
         setting.setBounds(0,0,200,100);
@@ -60,7 +65,7 @@ public class Menu extends JFrame {
         gbc.gridy = 120;
         background.add(setting,gbc);
     }
-
+//
 //    public static void main(String[] args) {
 //        Menu m = new Menu();
 //    }

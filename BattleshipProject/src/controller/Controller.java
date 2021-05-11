@@ -1,5 +1,8 @@
 package controller;
 
+import java.awt.Component;
+import java.awt.Menu;
+import java.awt.Window;
 import java.util.concurrent.BlockingQueue;
 
 import model.Board;
@@ -9,15 +12,18 @@ import view.View;
 public class Controller {
 	BlockingQueue<Message> queue;
 	Board gameboard;
-	View view;
+	view.Window window;
 
-	public Controller(BlockingQueue<Message> queue, Board gameboard, View view) {
+	public Controller(BlockingQueue<Message> queue, Board gameboard, view.Window window) {
 		this.queue = queue;
 		this.gameboard = gameboard;
-		this.view = view;
+		this.window = window;
+		
+		
+	
 	}
 	public void mainLoop() {
-		while (view.isDisplayable()) {
+		while (((Component) window).isDisplayable()) {
 			Message message = null;
 			try {
 				message = queue.take();
@@ -27,6 +33,14 @@ public class Controller {
 			}
 			
 			//handle message cases here
+			
+			
+			if (message.getClass() == StartMessage.class) {
+				StartMessage startMessage = (StartMessage) message;
+				View view = new View(startMessage.getQueue());
+				Controller controller = new Controller(startMessage.getQueue(), gameboard, view);
+				controller.mainLoop();
+			}
 			
 			if (message.getClass() == AttackMessage.class) {
 				AttackMessage attackMessage = (AttackMessage) message;
