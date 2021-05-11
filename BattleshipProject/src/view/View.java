@@ -27,7 +27,11 @@ public class View extends JFrame implements Window {
 	}
 	
 	public void hideGrid(Tile[][] grid) {
-		grid.hide();
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				grid[i][j].hide();
+			}
+		}
 	}
 	
 	private void buildGrids() {
