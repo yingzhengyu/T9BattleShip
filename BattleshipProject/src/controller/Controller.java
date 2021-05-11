@@ -45,13 +45,10 @@ public class Controller {
 				tile.attacked();
 			
 				try {
-					Thread.sleep(3000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-//				this.gameboard.updateCurrentPlayer();
-//				view.hideGrid(gameboard.getCurrentPlayer());
-//				view.revealGrid(gameboard.getCurrentPlayer());
 				changeTurns(view);
 			}
 		}

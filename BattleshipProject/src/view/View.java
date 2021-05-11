@@ -98,7 +98,13 @@ public class View extends JFrame implements Window {
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
 				leftGrid[i][j] = new Tile(this.queue);
-				if (i < 3 && j == 3) {
+				if (i <= 3 && j == 0) {
+					leftGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
+				}
+				else if (i == 0 && j > 5) {
+					leftGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
+				}
+				else if (i == 5  && j < 3) {
 					leftGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
 				}
 				
@@ -112,6 +118,15 @@ public class View extends JFrame implements Window {
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
 				rightGrid[i][j] = new Tile(this.queue);
+				if (i == 1 && j <= 3) {
+					rightGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
+				}
+				else if (i > 5 && j == 1) {
+					rightGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
+				}
+				else if (i >= 2 && i < 5  && j == 4) {
+					rightGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
+				}
 				rightPanel.add(rightGrid[i][j]);
 			}
 		}

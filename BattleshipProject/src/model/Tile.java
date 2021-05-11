@@ -27,8 +27,8 @@ public class Tile extends JButton implements ActionListener {
 		blackHitIcon = new ImageIcon(".\\Images\\blackx.png");
 		blackOIcon = new ImageIcon(".\\Images\\blacko.png");
 		redOIcon = new ImageIcon(".\\Images\\redo.png");
-		blankIcon = new ImageIcon(".\\Images\\blank.png");
-		this.setIcon(blackHitIcon);
+		blankIcon = new ImageIcon(".\\Images\\whitebg.png");
+		this.setIcon(blankIcon);
 		this.addActionListener(this);
 	}
 
@@ -77,7 +77,7 @@ public class Tile extends JButton implements ActionListener {
 	public void updateIcon(TileState currentState) {
 		switch (currentState) {
 		case EMPTY_NOT_HIT:
-			this.setIcon(blackHitIcon);
+			this.setIcon(blankIcon);
 			break;
 
 		case EMPTY_HIT:
