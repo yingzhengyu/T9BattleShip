@@ -8,7 +8,8 @@ import model.Board;
 import model.Tile;
 public class View extends JFrame implements Window {
 	// Stores a grid of integers to represent the game board
-	Tile[][] grid = new Tile[8][8];
+	Tile[][] leftGrid = new Tile[8][8];
+	Tile[][] rightGrid = new Tile[8][8];
 	JPanel outerPanel = new JPanel(new GridLayout(1,2,60,5));
 	JPanel leftPanel = new JPanel();
 	JPanel rightPanel = new JPanel();
@@ -25,14 +26,18 @@ public class View extends JFrame implements Window {
 		this.setVisible(true);
 	}
 	
+	public void hideGrid(Tile[][] grid) {
+		grid.hide();
+	}
+	
 	private void buildGrids() {
 
 		this.leftPanel.setLayout(new GridLayout(8,8,5,5));
 		
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
-				grid[i][j] = new Tile(this.queue);
-				leftPanel.add(grid[i][j]);
+				leftGrid[i][j] = new Tile(this.queue);
+				leftPanel.add(leftGrid[i][j]);
 			}
 		}
 		this.outerPanel.add(leftPanel);
@@ -41,8 +46,8 @@ public class View extends JFrame implements Window {
 		
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
-				grid[i][j] = new Tile(this.queue);
-				rightPanel.add(grid[i][j]);
+				rightGrid[i][j] = new Tile(this.queue);
+				rightPanel.add(rightGrid[i][j]);
 			}
 		}
 		this.outerPanel.add(rightPanel);
