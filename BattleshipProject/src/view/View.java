@@ -34,6 +34,14 @@ public class View extends JFrame implements Window {
 		}
 	}
 	
+	public void revealGrid(Tile[][] grid) {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				grid[i][j].reveal();
+			}
+		}
+	}
+	
 	private void buildGrids() {
 
 		this.leftPanel.setLayout(new GridLayout(8,8,5,5));

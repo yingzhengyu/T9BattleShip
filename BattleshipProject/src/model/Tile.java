@@ -14,7 +14,7 @@ public class Tile extends JButton implements ActionListener {
 	ImageIcon blackHitIcon;
 	ImageIcon blankIcon;
 	BlockingQueue<Message> queue;
-	
+
 
 	TileState state = TileState.EMPTY_NOT_HIT; // default state
 	TileState placeholderState; // this is used when hiding the tile to remember its true state before setting state to hidden
@@ -82,9 +82,16 @@ public class Tile extends JButton implements ActionListener {
 			this.setIcon(blankIcon);
 		}
 	}
-	
+
 	public void hide() {
-		this.placeholderState = this.state;
-		this.updateIcon(TileState.HIDDEN);
+		if (this.state == TileState.EMPTY_NOT_HIT|| this.state == TileState.OCCUPIED_NOT_HIT) {
+			this.placeholderState = this.state;
+			this.updateIcon(TileState.HIDDEN);
+		}
+	}
+
+	public void reveal() {
+		this.state = this.placeholderState;
+		this.updateIcon(this.state);
 	}
 }
