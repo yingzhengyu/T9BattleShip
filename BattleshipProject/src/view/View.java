@@ -23,6 +23,7 @@ public class View extends JFrame implements Window {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		buildGrids();
+		// player 1 is active player on turn one 
 		this.hideGrid(1);
 		this.setVisible(true);
 	}

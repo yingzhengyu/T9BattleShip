@@ -43,11 +43,23 @@ public class Controller {
 				AttackMessage attackMessage = (AttackMessage) message;
 				Tile tile = attackMessage.getTile();
 				tile.attacked();
-				
-				this.gameboard.updateCurrentPlayer();
-				view.hideGrid(gameboard.getCurrentPlayer());
-				view.revealGrid(gameboard.getCurrentPlayer());
+			
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+//				this.gameboard.updateCurrentPlayer();
+//				view.hideGrid(gameboard.getCurrentPlayer());
+//				view.revealGrid(gameboard.getCurrentPlayer());
+				changeTurns(view);
 			}
 		}
+	}
+	
+	public void changeTurns(View view) {
+		this.gameboard.updateCurrentPlayer();
+		view.hideGrid(gameboard.getCurrentPlayer());
+		view.revealGrid(gameboard.getCurrentPlayer());
 	}
 }
