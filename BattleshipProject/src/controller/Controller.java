@@ -44,11 +44,14 @@ public class Controller {
 				Tile tile = attackMessage.getTile();
 				tile.attacked();
 			
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(2000);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+			}
+			else if (message.getClass() == SwitchMessage.class) {
+				View view = (View) window; 
 				changeTurns(view);
 			}
 		}

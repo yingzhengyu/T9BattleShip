@@ -7,6 +7,8 @@ import java.awt.GridLayout;
 import java.util.concurrent.*;
 import javax.swing.*;
 import controller.Message;
+import controller.StartMessage;
+import controller.SwitchMessage;
 import model.Board;
 import model.Tile;
 import model.TileState;
@@ -25,7 +27,7 @@ public class View extends JFrame implements Window {
 	public View(BlockingQueue<Message> queue) {
 		this.queue = queue;
 
-		this.setSize(1400, 1000);
+		this.setSize(1800, 1000);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -117,7 +119,7 @@ public class View extends JFrame implements Window {
 	// temp method to build the pre-set grids
 	private void buildGrids() {
 
-		this.leftPanel.setLayout(new GridLayout(8,8,5,5));
+		this.leftPanel.setLayout(new GridLayout(8,8,0,0));
 
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
@@ -139,8 +141,15 @@ public class View extends JFrame implements Window {
 		
 		
 		middlePanel.add(switchButton);
+		switchButton.addActionListener(e -> {
+            try {
+                queue.put(new SwitchMessage());
+            } catch (InterruptedException exception) {
+                // do nothing
+            }
+        });
 
-		this.rightPanel.setLayout(new GridLayout(8,8,5,5));
+		this.rightPanel.setLayout(new GridLayout(8,8,0,0));
 
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {

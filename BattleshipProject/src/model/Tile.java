@@ -82,6 +82,8 @@ public class Tile extends JButton implements ActionListener {
 
 		case EMPTY_HIT:
 			this.setIcon(redHitIcon);
+			this.setEnabled(false);
+			//this.setDisabledIcon(redHitIcon);
 			break;
 			
 		case OCCUPIED_NOT_HIT:
@@ -89,7 +91,9 @@ public class Tile extends JButton implements ActionListener {
 			break;
 			
 		case OCCUPIED_HIT:
-			this.setIcon(redOIcon);
+			//this.setIcon(redOIcon);
+			this.setEnabled(false);
+			this.setDisabledIcon(redOIcon);
 			break;
 			
 		case HIDDEN:
