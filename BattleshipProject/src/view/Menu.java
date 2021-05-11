@@ -65,8 +65,4 @@ public class Menu extends JFrame implements Window{
         gbc.gridy = 120;
         background.add(setting,gbc);
     }
-//
-//    public static void main(String[] args) {
-//        Menu m = new Menu();
-//    }
 }

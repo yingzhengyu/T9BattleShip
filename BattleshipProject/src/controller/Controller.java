@@ -18,9 +18,6 @@ public class Controller {
 		this.queue = queue;
 		this.gameboard = gameboard;
 		this.window = window;
-		
-		
-	
 	}
 	public void mainLoop() {
 		while (((Component) window).isDisplayable()) {
@@ -34,15 +31,14 @@ public class Controller {
 			
 			//handle message cases here
 			
-			
 			if (message.getClass() == StartMessage.class) {
 				StartMessage startMessage = (StartMessage) message;
+				((Window)window).dispose();
 				View view = new View(startMessage.getQueue());
 				Controller controller = new Controller(startMessage.getQueue(), gameboard, view);
 				controller.mainLoop();
 			}
-			
-			if (message.getClass() == AttackMessage.class) {
+			else if (message.getClass() == AttackMessage.class) {
 				AttackMessage attackMessage = (AttackMessage) message;
 				Tile tile = attackMessage.getTile();
 				tile.attacked();
