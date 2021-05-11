@@ -4,6 +4,8 @@ import view.View;
 
 public class Board {
 	
+	private int currentPlayer = 1;
+	
 	private Tile[][] grid = new Tile[8][8];
 	
 	public void updateGrid(char x, int y) {
@@ -27,5 +29,19 @@ public class Board {
 
 	public Tile[][] getGrid() {
 		return this.grid;
+	}
+	
+	public int getCurrentPlayer() {
+		return this.currentPlayer;
+	}
+	
+	// switches the current player from 1 to 2 or 2 to 1 
+	public void updateCurrentPlayer() {
+		if (this.currentPlayer == 1) {
+			this.currentPlayer = 2;
+		}
+		else if (this.currentPlayer == 2) {
+			this.currentPlayer = 1;
+		}
 	}
 }
