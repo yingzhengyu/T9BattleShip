@@ -6,6 +6,7 @@ import javax.swing.*;
 import controller.Message;
 import model.Board;
 import model.Tile;
+import model.TileState;
 public class View extends JFrame implements Window {
 	// Stores a grid of integers to represent the game board
 	Tile[][] leftGrid = new Tile[8][8];
@@ -62,6 +63,34 @@ public class View extends JFrame implements Window {
 		}
 	}
 
+	
+	// general method, builds empty tiles
+//	private void buildGrids() {
+//
+//		this.leftPanel.setLayout(new GridLayout(8,8,5,5));
+//
+//		for (int i = 0; i <= 7; i++) {
+//			for (int j = 0; j <= 7; j++) {
+//				leftGrid[i][j] = new Tile(this.queue);
+//				leftPanel.add(leftGrid[i][j]);
+//			}
+//		}
+//		this.outerPanel.add(leftPanel);
+//
+//		this.rightPanel.setLayout(new GridLayout(8,8,5,5));
+//
+//		for (int i = 0; i <= 7; i++) {
+//			for (int j = 0; j <= 7; j++) {
+//				rightGrid[i][j] = new Tile(this.queue);
+//				rightPanel.add(rightGrid[i][j]);
+//			}
+//		}
+//		this.outerPanel.add(rightPanel);
+//
+//		this.add(this.outerPanel);
+//	}
+
+	// temp method to build the pre-set grids
 	private void buildGrids() {
 
 		this.leftPanel.setLayout(new GridLayout(8,8,5,5));
@@ -69,6 +98,10 @@ public class View extends JFrame implements Window {
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
 				leftGrid[i][j] = new Tile(this.queue);
+				if (i < 3 && j == 3) {
+					leftGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
+				}
+				
 				leftPanel.add(leftGrid[i][j]);
 			}
 		}
@@ -86,5 +119,5 @@ public class View extends JFrame implements Window {
 
 		this.add(this.outerPanel);
 	}
-
+	
 }

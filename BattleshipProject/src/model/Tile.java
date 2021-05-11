@@ -12,6 +12,8 @@ public class Tile extends JButton implements ActionListener {
 
 	ImageIcon redHitIcon;
 	ImageIcon blackHitIcon;
+	ImageIcon redOIcon; // O = OCCUPIED
+	ImageIcon blackOIcon;
 	ImageIcon blankIcon;
 	BlockingQueue<Message> queue;
 
@@ -23,6 +25,8 @@ public class Tile extends JButton implements ActionListener {
 		this.queue = queue;
 		redHitIcon = new ImageIcon(".\\Images\\redx.png");
 		blackHitIcon = new ImageIcon(".\\Images\\blackx.png");
+		blackOIcon = new ImageIcon(".\\Images\\blacko.png");
+		redOIcon = new ImageIcon(".\\Images\\redo.png");
 		blankIcon = new ImageIcon(".\\Images\\blank.png");
 		this.setIcon(blackHitIcon);
 		this.addActionListener(this);
@@ -80,8 +84,17 @@ public class Tile extends JButton implements ActionListener {
 			this.setIcon(redHitIcon);
 			break;
 			
+		case OCCUPIED_NOT_HIT:
+			this.setIcon(blackOIcon);
+			break;
+			
+		case OCCUPIED_HIT:
+			this.setIcon(redOIcon);
+			break;
+			
 		case HIDDEN:
 			this.setIcon(blankIcon);
+			break;
 		}
 	}
 
