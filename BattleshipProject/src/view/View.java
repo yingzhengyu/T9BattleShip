@@ -6,56 +6,40 @@ import java.awt.GridLayout;
 import java.util.concurrent.*;
 import javax.swing.*;
 import controller.Message;
-import controller.StartMessage;
-import controller.SwitchMessage;
 import model.Board;
 import model.Tile;
 import model.TileState;
 public class View extends JFrame implements Window {
 	// Stores a grid of integers to represent the game board
-	int currentPlayer = 1;
-	JButton switchButton = new JButton("next");
+	//int currentPlayer = 1;
 	Tile[][] leftGrid = new Tile[8][8];
 	Tile[][] rightGrid = new Tile[8][8];
 	JPanel outerPanel = new JPanel(new GridLayout(1,2,60,5));
 	JPanel leftPanel = new JPanel();
-	JPanel middlePanel = new JPanel();
+	//JPanel middlePanel = new JPanel();
 	JPanel rightPanel = new JPanel();
 	BlockingQueue<Message> queue;
 
-	public View(BlockingQueue<Message> queue) {
+	public View(BlockingQueue<Message> queue, int currentPlayer) {
 		this.queue = queue;
 
-		this.setSize(1800, 1000);
+		this.setSize(1600,1000);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		switchButton.addActionListener(e1 ->{
-			if(currentPlayer == 1) {
-				hideGrid(1);
-				//setVisible(false);
-				JOptionPane.showMessageDialog(null, "Player2's turn","SWITCH",JOptionPane.INFORMATION_MESSAGE);
-				//this.setVisible(true);
-				revealGrid(2);
-				currentPlayer = 2;
-			}else {
-				hideGrid(2);
-				JOptionPane.showMessageDialog(null, "Player1's turn","SWITCH",JOptionPane.INFORMATION_MESSAGE);
-				revealGrid(1);
-				currentPlayer = 1;
-
-			}
-			
-		});
-
 		buildGrids();
 		// player 1 is active player on turn one 
-//		this.hideGrid(1);
+		this.hideGrid(currentPlayer);
+		this.revealGrid(currentPlayer);
 		this.setVisible(true);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 	    this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 	}
 
+//	public void viewVisible(boolean on) {
+//		this.setVisible(());
+//	}
+	
 	public void hideGrid(int currentPlayer) {
 		if (currentPlayer == 1 ) {
 			for (int i = 0; i < 8; i++) {
@@ -120,7 +104,7 @@ public class View extends JFrame implements Window {
 	// temp method to build the pre-set grids
 	private void buildGrids() {
 
-		this.leftPanel.setLayout(new GridLayout(8,8,0,0));
+		this.leftPanel.setLayout(new GridLayout(8,8,5,5));
 
 		for (int i = 0; i <= 7; i++) {
 			for (int j = 0; j <= 7; j++) {
@@ -140,15 +124,6 @@ public class View extends JFrame implements Window {
 		}
 		this.outerPanel.add(leftPanel);
 		
-		
-		middlePanel.add(switchButton);
-		switchButton.addActionListener(e -> {
-            try {
-                queue.put(new SwitchMessage());
-            } catch (InterruptedException exception) {
-                // do nothing
-            }
-        });
 
 		this.rightPanel.setLayout(new GridLayout(8,8,0,0));
 
@@ -167,9 +142,8 @@ public class View extends JFrame implements Window {
 				rightPanel.add(rightGrid[i][j]);
 			}
 		}
-		this.outerPanel.add(switchButton);
 		this.outerPanel.add(rightPanel);
-
+		
 		this.add(this.outerPanel);
 	}
 }

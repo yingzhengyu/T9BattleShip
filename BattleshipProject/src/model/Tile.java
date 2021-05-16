@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import controller.AttackMessage;
 import controller.Message;
+import controller.SwitchMessage;
 
 public class Tile extends JButton implements ActionListener {
 
@@ -43,6 +44,9 @@ public class Tile extends JButton implements ActionListener {
 		//		}
 		try {
 			Message message = new AttackMessage(this);
+			queue.put(message);
+			
+			message = new SwitchMessage();
 			queue.put(message);
 		}
 		catch (InterruptedException exception) {
@@ -83,15 +87,16 @@ public class Tile extends JButton implements ActionListener {
 		case EMPTY_HIT:
 			this.setIcon(redHitIcon);
 			this.setEnabled(false);
-			//this.setDisabledIcon(redHitIcon);
+			this.setDisabledIcon(redHitIcon);
 			break;
 			
 		case OCCUPIED_NOT_HIT:
+			this.setDisabledIcon(blackOIcon);
 			this.setIcon(blackOIcon);
 			break;
 			
 		case OCCUPIED_HIT:
-			//this.setIcon(redOIcon);
+			this.setIcon(redOIcon);
 			this.setEnabled(false);
 			this.setDisabledIcon(redOIcon);
 			break;
@@ -106,10 +111,12 @@ public class Tile extends JButton implements ActionListener {
 		if (this.state == TileState.EMPTY_NOT_HIT|| this.state == TileState.OCCUPIED_NOT_HIT) {
 			this.placeholderState = this.state;
 			this.updateIcon(TileState.HIDDEN);
+			this.setEnabled(true);
 		}
 	}
 
 	public void reveal() {
 		this.setTileState(placeholderState);
+		this.setEnabled(false);
 	}
 }

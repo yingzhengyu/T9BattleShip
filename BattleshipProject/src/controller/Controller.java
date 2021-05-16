@@ -7,7 +7,7 @@ import java.util.concurrent.BlockingQueue;
 
 import model.Board;
 import model.Tile;
-import view.View;
+import view.*;
 
 public class Controller {
 	BlockingQueue<Message> queue;
@@ -34,12 +34,13 @@ public class Controller {
 			if (message.getClass() == StartMessage.class) {
 				StartMessage startMessage = (StartMessage) message;
 				((Window)window).dispose();
-				View view = new View(startMessage.getQueue());
-				Controller controller = new Controller(startMessage.getQueue(), gameboard, view);
+				View view = new View(queue, gameboard.getCurrentPlayer());
+				BetweenTurnScreen between = new BetweenTurnScreen(gameboard.getCurrentPlayer(), queue, view);
+				Controller controller = new Controller(queue, gameboard, between);
 				controller.mainLoop();
 			}
 			else if (message.getClass() == AttackMessage.class) {
-				View view = (View) window;
+				//View view = (View) window;
 				AttackMessage attackMessage = (AttackMessage) message;
 				Tile tile = attackMessage.getTile();
 				tile.attacked();
@@ -51,8 +52,22 @@ public class Controller {
 //				}
 			}
 			else if (message.getClass() == SwitchMessage.class) {
-				View view = (View) window; 
-				changeTurns(view);
+				View view = (View) window;
+				view.setVisible(false);
+				changeTurns(view); 
+				BetweenTurnScreen between = new BetweenTurnScreen(gameboard.getCurrentPlayer(), queue, view);
+				Controller controller = new Controller(queue, gameboard, between);
+				controller.mainLoop();
+			}
+			else if(message.getClass() == SwitchBoardMessage.class) {
+				SwitchBoardMessage sMessage = (SwitchBoardMessage) message;
+				View view = sMessage.getView();
+				view.setVisible(true);
+				((Window) window).dispose();
+				Controller controller = new Controller(queue, gameboard, view);
+				controller.mainLoop();
+				
+	
 			}
 		}
 	}
