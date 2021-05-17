@@ -8,6 +8,7 @@ import javax.swing.*;
 import controller.AttackMessage;
 import controller.Message;
 import controller.SwitchMessage;
+import controller.VictoryMessage;
 
 public class Tile extends JButton implements ActionListener {
 
@@ -44,9 +45,6 @@ public class Tile extends JButton implements ActionListener {
 		//		}
 		try {
 			Message message = new AttackMessage(this);
-			queue.put(message);
-			
-			message = new SwitchMessage();
 			queue.put(message);
 		}
 		catch (InterruptedException exception) {

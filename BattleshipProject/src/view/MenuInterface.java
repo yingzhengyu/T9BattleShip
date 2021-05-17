@@ -8,7 +8,7 @@ import controller.StartMessage;
 import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
-public class Menu extends JFrame implements Window{
+public class MenuInterface extends JFrame implements Window{
 
     JButton start = new JButton("Start");
     JButton setting = new JButton("Setting");
@@ -18,7 +18,7 @@ public class Menu extends JFrame implements Window{
     JLabel textfield = new JLabel();
     GridBagConstraints gbc = new GridBagConstraints();
 
-    public Menu(BlockingQueue<Message> queue){
+    public MenuInterface(BlockingQueue<Message> queue){
 
         this.setSize(1280,720);
         this.setVisible(true);
