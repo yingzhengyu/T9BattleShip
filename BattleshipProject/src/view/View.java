@@ -111,20 +111,8 @@ public class View extends JFrame implements Window {
 	private void buildGrids() {
 
 		this.leftPanel.setLayout(new GridLayout(8,8,5,5));
-//
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {
-//				leftGrid[i][j] = new Tile(this.queue);
-//				if (i <= 3 && j == 0) {
-//					leftGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
-//				}
-//				else if (i == 0 && j > 5) {
-//					leftGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
-//				}
-//				else if (i == 5  && j < 3) {
-//					leftGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
-//				}
-//				
 				leftPanel.add(leftGrid[i][j]);
 			}
 		}
@@ -135,16 +123,6 @@ public class View extends JFrame implements Window {
 
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < column; j++) {
-//				rightGrid[i][j] = new Tile(this.queue);
-//				if (i == 1 && j <= 3) {
-//					rightGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
-//				}
-//				else if (i > 5 && j == 1) {
-//					rightGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
-//				}
-//				else if (i >= 2 && i < 5  && j == 4) {
-//					rightGrid[i][j].setTileState(TileState.OCCUPIED_NOT_HIT);
-//				}
 				rightPanel.add(rightGrid[i][j]);
 			}
 		}

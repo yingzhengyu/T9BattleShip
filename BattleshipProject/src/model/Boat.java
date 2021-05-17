@@ -25,17 +25,6 @@ public class Boat {
 		this.row = row;
 		this.column = column;
 		this.vertical = vert;
-		
-//		if (vert) {
-//			for (int i = 0; i < size; i++) {
-//				boatCoordinate[row + i][column] = TileState.OCCUPIED_NOT_HIT;
-//			}
-//		}
-//		else {
-//			for (int i = 0; i < size; i++) {
-//				boatCoordinate[row][column + i] = TileState.OCCUPIED_NOT_HIT;
-//			}
-//		}
 	}
 	
 	public int getSize() {
