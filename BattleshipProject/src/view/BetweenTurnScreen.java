@@ -9,7 +9,6 @@ import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
 public class BetweenTurnScreen extends JFrame implements Window {
-	
 	JButton next = new JButton("Next");
 	JPanel title = new JPanel();
 	JLabel textfield = new JLabel();
