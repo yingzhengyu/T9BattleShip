@@ -32,7 +32,7 @@ public class Victoryscreen extends JFrame implements Window {
 		
 		else {
 			textfield.setForeground(Color.RED);
-			textfield.setText("Player2's Wins!");
+			textfield.setText("Player2 Wins!");
 		}
 		
 		this.setSize(1600,1000);

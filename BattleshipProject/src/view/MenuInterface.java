@@ -13,8 +13,8 @@ public class MenuInterface extends JFrame implements Window{
     JButton start = new JButton("Start");
     JButton setting = new JButton("Setting");
     JPanel title = new JPanel();
-    ImageIcon img = new ImageIcon(".\\Images\\Background.jpg");
-    JLabel background = new JLabel("",img, JLabel.CENTER);
+    //ImageIcon img = new ImageIcon(".\\Images\\Background.jpg");
+    //JLabel background = new JLabel("",img, JLabel.CENTER);
     JLabel textfield = new JLabel();
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -27,8 +27,8 @@ public class MenuInterface extends JFrame implements Window{
         this.getContentPane().setBackground(Color.BLACK);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        this.add(background);
-        background.setOpaque(true);
+        //this.add(background);
+        //background.setOpaque(true);
 
         textfield.setForeground(Color.WHITE);
         textfield.setFont(new Font("normalFont", Font.BOLD,75));
@@ -55,20 +55,20 @@ public class MenuInterface extends JFrame implements Window{
         setting.setBounds(0,0,200,100);
         
         
-        //this.setLayout(new GridBagLayout());
-        background.setLayout(new GridBagLayout());
+        this.setLayout(new GridBagLayout());
+        //background.setLayout(new GridBagLayout());
         gbc.insets = new Insets(0,5,100,5);
         gbc.gridx = 0;
         gbc.gridy = 30;
         gbc.fill = GridBagConstraints.VERTICAL;
-        //this.add(title, gbc);
-        background.add(title,gbc);
+        this.add(title, gbc);
+        //background.add(title,gbc);
         gbc.gridy = 60;
-        //this.add(start, gbc);
-        background.add(start,gbc);
+        this.add(start, gbc);
+        //background.add(start,gbc);
         gbc.gridy = 120;
-        //this.add(setting, gbc);
-        background.add(setting,gbc);
+        this.add(setting, gbc);
+        //background.add(setting,gbc);
         
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
