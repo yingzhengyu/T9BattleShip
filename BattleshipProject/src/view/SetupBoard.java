@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import controller.Message;
 import model.Boat;
 import model.Tile;
+import model.TileState;
 
 public class SetupBoard extends JFrame implements Window {
 	Tile[][] grid = new Tile[8][8];
@@ -24,6 +25,9 @@ public class SetupBoard extends JFrame implements Window {
 	JTextField[] textField2 = new JTextField [5];
 	JCheckBox[] vertical = new JCheckBox[5];
 	JCheckBox[] horizontal = new JCheckBox[5];
+	boolean[] vert = {true,true,true,true,true};
+	int[] boatSize = {5,4,3,3,2};
+	ArrayList<Boat> boats = new ArrayList<>();
 	ButtonGroup[] checkBoxGroup = new ButtonGroup[5];
 	JPanel gridPanel = new JPanel();
 	JPanel rowsPanel = new JPanel();
@@ -141,14 +145,14 @@ public class SetupBoard extends JFrame implements Window {
         rightPanel.add(boat1,gbc);
         gbc.gridy = 2;
         gbc.gridwidth = 1;
-        rightPanel.add(new JLabel("Row: "),gbc);
+        rightPanel.add(new JLabel("Row(1-8): "),gbc);
         gbc.gridx = 1;
         rightPanel.add(textField[0], gbc);
         gbc.gridy = 3;
         gbc.gridwidth = 1;
         rightPanel.add(textField2[0],gbc);
         gbc.gridx = 0;
-        rightPanel.add(new JLabel("Column: "),gbc);
+        rightPanel.add(new JLabel("Column(A-H): "),gbc);
         gbc.gridy = 4;
         rightPanel.add(vertical[0],gbc);
         gbc.gridx = 1;
@@ -162,14 +166,14 @@ public class SetupBoard extends JFrame implements Window {
         rightPanel.add(boat2,gbc);
         gbc.gridy = 7;
         gbc.gridwidth = 1;
-        rightPanel.add(new JLabel("Row: "),gbc);
+        rightPanel.add(new JLabel("Row(1-8): "),gbc);
         gbc.gridx = 1;
         rightPanel.add(textField[1], gbc);
         gbc.gridy = 8;
         gbc.gridwidth = 1;
         rightPanel.add(textField2[1],gbc);
         gbc.gridx = 0;
-        rightPanel.add(new JLabel("Column: "),gbc);
+        rightPanel.add(new JLabel("Column(A-H): "),gbc);
         gbc.gridy = 9;
         rightPanel.add(vertical[1],gbc);
         gbc.gridx = 1;
@@ -183,14 +187,14 @@ public class SetupBoard extends JFrame implements Window {
         rightPanel.add(boat3,gbc);
         gbc.gridy = 12;
         gbc.gridwidth = 1;
-        rightPanel.add(new JLabel("Row: "),gbc);
+        rightPanel.add(new JLabel("Row(1-8): "),gbc);
         gbc.gridx = 1;
         rightPanel.add(textField[2], gbc);
         gbc.gridy = 13;
         gbc.gridwidth = 1;
         rightPanel.add(textField2[2],gbc);
         gbc.gridx = 0;
-        rightPanel.add(new JLabel("Column: "),gbc);
+        rightPanel.add(new JLabel("Column(A-H): "),gbc);
         gbc.gridy = 14;
         rightPanel.add(vertical[2],gbc);
         gbc.gridx = 1;
@@ -204,14 +208,14 @@ public class SetupBoard extends JFrame implements Window {
         rightPanel.add(boat4,gbc);
         gbc.gridy = 17;
         gbc.gridwidth = 1;
-        rightPanel.add(new JLabel("Row: "),gbc);
+        rightPanel.add(new JLabel("Row(1-8): "),gbc);
         gbc.gridx = 1;
         rightPanel.add(textField[3], gbc);
         gbc.gridy = 18;
         gbc.gridwidth = 1;
         rightPanel.add(textField2[3],gbc);
         gbc.gridx = 0;
-        rightPanel.add(new JLabel("Column: "),gbc);
+        rightPanel.add(new JLabel("Column(A-H): "),gbc);
         gbc.gridy = 19;
         rightPanel.add(vertical[3],gbc);
         gbc.gridx = 1;
@@ -225,14 +229,14 @@ public class SetupBoard extends JFrame implements Window {
         rightPanel.add(boat5,gbc);
         gbc.gridy = 22;
         gbc.gridwidth = 1;
-        rightPanel.add(new JLabel("Row: "),gbc);
+        rightPanel.add(new JLabel("Row(1-8): "),gbc);
         gbc.gridx = 1;
         rightPanel.add(textField[4], gbc);
         gbc.gridy = 23;
         gbc.gridwidth = 1;
         rightPanel.add(textField2[4],gbc);
         gbc.gridx = 0;
-        rightPanel.add(new JLabel("Column: "),gbc);
+        rightPanel.add(new JLabel("Column(A-H): "),gbc);
         gbc.gridy = 24;
         rightPanel.add(vertical[4],gbc);
         gbc.gridx = 1;
@@ -243,6 +247,30 @@ public class SetupBoard extends JFrame implements Window {
         rightPanel.add(update, gbc);
         
         //set up button action listener
+        vertical[0].addActionListener(e -> vert[0] = true);
+        horizontal[0].addActionListener(e -> vert[0] = false);
+        vertical[1].addActionListener(e -> vert[1] = true);
+        horizontal[1].addActionListener(e -> vert[1] = false);
+        vertical[2].addActionListener(e -> vert[2] = true);
+        horizontal[2].addActionListener(e -> vert[2] = false);
+        vertical[3].addActionListener(e -> vert[3] = true);
+        horizontal[3].addActionListener(e -> vert[3] = false);
+        vertical[4].addActionListener(e -> vert[4] = true);
+        horizontal[4].addActionListener(e -> vert[4] = false);
+        
+        update.addActionListener(e -> {
+        	ArrayList<Boat> temp = new ArrayList<>();
+        	for (int i = 0; i < 5; i++) {
+        		char ch = textField2[i].getText().charAt(0);
+        		int column = ch - 65;
+        		int row = Integer.parseInt(textField[i].getText()) - 1; ;
+        		Boat boat = new Boat(boatSize[i], row, column, vert[i]);
+        		temp.add(boat);
+        	}
+        	boats = temp;
+        	updateGrid();
+        });
+        
         
         
  
@@ -311,6 +339,31 @@ public class SetupBoard extends JFrame implements Window {
 		this.setVisible(true);
 	}
 	
+	
+	public void updateGrid(){
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				grid[i][j].setIcon(null);
+			}
+		}
+		
+		for(int i = 0; i < boats.size(); i++) {
+			if (boats.get(i).getVert()) {
+				for (int j = 0; j < boats.get(i).getSize(); j++) {
+					grid[boats.get(i).getRow() + j][boats.get(i).getColumn()].setIcon(blackOIcon);
+					grid[boats.get(i).getRow() + j][boats.get(i).getColumn()].setDisabledIcon(blackOIcon);
+				}	
+			}		
+			else {
+				for (int j = 0; j < boats.get(i).getSize(); j++) {
+					grid[boats.get(i).getRow()][boats.get(i).getColumn() + j].setIcon(blackOIcon);
+					grid[boats.get(i).getRow()][boats.get(i).getColumn() + j].setDisabledIcon(blackOIcon);
+				}	
+			}	
+		}
+		
+
+	}
 
 	 public static void main(String[] args) {
 		 BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
@@ -319,6 +372,3 @@ public class SetupBoard extends JFrame implements Window {
 
 }
 
-//public void updateGrid(){
-//
-//}
