@@ -36,6 +36,30 @@ public class Controller {
 			
 			if (message.getClass() == StartMessage.class) {
 				((Window)window).dispose();
+//				View view = new View(queue, gameboard.getCurrentPlayer(), gameboard.getGrid(1), gameboard.getGrid(2));
+//				BetweenTurnScreen between = new BetweenTurnScreen(gameboard.getCurrentPlayer(), queue, view);
+//				Controller controller = new Controller(queue, gameboard, between);
+//				controller.mainLoop();
+				SetupBoard player1Setup = new SetupBoard(1, queue); 
+				Controller controller = new Controller(queue, gameboard, player1Setup);
+				controller.mainLoop();
+			}
+			
+			else if(message.getClass() == Next1Message.class) {
+				Next1Message nextMessage = (Next1Message) message;
+				gameboard.setPlayerBoat(1, nextMessage.getBoat());
+				gameboard.updateBoard();
+				((Window)window).dispose();
+				SetupBoard player2Setup = new SetupBoard(2, queue); 
+				Controller controller = new Controller(queue, gameboard, player2Setup);
+				controller.mainLoop();
+			}
+			
+			else if(message.getClass() == Next2Message.class) {
+				Next2Message nextMessage = (Next2Message) message;
+				gameboard.setPlayerBoat(2, nextMessage.getBoat());
+				gameboard.updateBoard();
+				((Window)window).dispose();
 				View view = new View(queue, gameboard.getCurrentPlayer(), gameboard.getGrid(1), gameboard.getGrid(2));
 				BetweenTurnScreen between = new BetweenTurnScreen(gameboard.getCurrentPlayer(), queue, view);
 				Controller controller = new Controller(queue, gameboard, between);

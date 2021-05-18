@@ -105,6 +105,49 @@ public class Board {
 		}
 	}
 	
+	public void setPlayerBoat(int player, ArrayList<Boat> boat) {
+		if(player == 1) {
+			player1Boats = boat;
+		}
+		else {
+			player2Boats = boat;
+		}
+	}
+	
+	public void updateBoard() {
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < column; j++) {
+				player1Grid[i][j] = new Tile(this.queue);
+				player2Grid[i][j] = new Tile(this.queue);
+			}
+		}
+		for(int i = 0; i < player1Boats.size(); i++) {
+			if (player1Boats.get(i).getVert()) {
+				for (int j = 0; j < player1Boats.get(i).getSize(); j++) {
+					player1Grid[player1Boats.get(i).getRow() + j][player1Boats.get(i).getColumn()].setTileState(TileState.OCCUPIED_NOT_HIT);	
+				}	
+			}		
+			else {
+				for (int j = 0; j < player1Boats.get(i).getSize(); j++) {
+					player1Grid[player1Boats.get(i).getRow()][player1Boats.get(i).getColumn() + j].setTileState(TileState.OCCUPIED_NOT_HIT);	
+				}	
+			}	
+		}
+		
+		for(int i = 0; i < player2Boats.size(); i++) {
+			if (player2Boats.get(i).getVert()) {
+				for (int j = 0; j < player2Boats.get(i).getSize(); j++) {
+					player2Grid[player2Boats.get(i).getRow() + j][player2Boats.get(i).getColumn()].setTileState(TileState.OCCUPIED_NOT_HIT);	
+				}	
+			}		
+			else {
+				for (int j = 0; j < player2Boats.get(i).getSize(); j++) {
+					player2Grid[player2Boats.get(i).getRow()][player2Boats.get(i).getColumn() + j].setTileState(TileState.OCCUPIED_NOT_HIT);	
+				}	
+			}	
+		}
+	}
+	
 //	public setGrid(int player) {
 //		if(player == 1) {
 //		

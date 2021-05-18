@@ -14,10 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.Message;
-import model.Boat;
-import model.Tile;
-import model.TileState;
+import controller.*;
+import model.*;
 
 public class SetupBoard extends JFrame implements Window {
 	Tile[][] grid = new Tile[8][8];
@@ -271,9 +269,32 @@ public class SetupBoard extends JFrame implements Window {
         	updateGrid();
         });
         
-        
-        
- 
+        next.addActionListener(e -> {
+        	ArrayList<Boat> temp = new ArrayList<>();
+        	for (int i = 0; i < 5; i++) {
+        		char ch = textField2[i].getText().charAt(0);
+        		int column = ch - 65;
+        		int row = Integer.parseInt(textField[i].getText()) - 1; ;
+        		Boat boat = new Boat(boatSize[i], row, column, vert[i]);
+        		temp.add(boat);
+        	}
+        	boats = temp;
+        	if(player == 1) {
+        		try {
+                    queue.put(new Next1Message(boats));
+                } catch (InterruptedException exception) {
+                    // do nothing
+                }
+        		
+        	}
+        	else if(player == 2) {
+        		try {
+                    queue.put(new Next2Message(boats));
+                } catch (InterruptedException exception) {
+                    // do nothing
+                }
+        	}
+        });
 		
 		//setup left(center) panel, where the coordinates shows
 		rows[0] = new JButton("A");
@@ -365,10 +386,10 @@ public class SetupBoard extends JFrame implements Window {
 
 	}
 
-	 public static void main(String[] args) {
-		 BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-		 SetupBoard s = new SetupBoard(1,queue);
-	    }
+//	 public static void main(String[] args) {
+//		 BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+//		 SetupBoard s = new SetupBoard(1,queue);
+//	    }
 
 }
 
