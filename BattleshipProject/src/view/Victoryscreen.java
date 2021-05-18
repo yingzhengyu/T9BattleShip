@@ -14,7 +14,7 @@ import java.util.concurrent.BlockingQueue;
 public class Victoryscreen extends JFrame implements Window {
 	
 	JButton menu = new JButton("Menu");
-	JButton quit = new JButton("quit");
+	JButton quit = new JButton("Quit");
 	JPanel title = new JPanel();
 	JLabel textfield = new JLabel();
 	GridBagConstraints gbc = new GridBagConstraints();
@@ -47,7 +47,7 @@ public class Victoryscreen extends JFrame implements Window {
         title.add(textfield);
         title.setOpaque(true);
         
-        menu.setFont(new Font("Ink Free", Font.PLAIN, 50));
+        menu.setFont(new Font("normalFont", Font.PLAIN, 50));
         menu.setBounds(0,0,200,100);
         menu.addActionListener(e -> {
             try {
@@ -57,7 +57,7 @@ public class Victoryscreen extends JFrame implements Window {
             }
         });
         
-        quit.setFont(new Font("Ink Free", Font.PLAIN, 50));
+        quit.setFont(new Font("normalFont", Font.PLAIN, 50));
         quit.setBounds(0,0,200,100);
         quit.addActionListener(e -> {
             try {
