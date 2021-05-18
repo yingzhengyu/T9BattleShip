@@ -16,7 +16,11 @@ import javax.swing.JTextField;
 
 import controller.*;
 import model.*;
-
+/**
+ * 
+ * @author Team 9
+ *	This class is for creating the game board 
+ */
 public class SetupBoard extends JFrame implements Window {
 	Tile[][] grid = new Tile[8][8];
 	JTextField[] textField = new JTextField [5];
@@ -43,7 +47,11 @@ public class SetupBoard extends JFrame implements Window {
 	JButton update = new JButton("Update");
 	JButton next = new JButton("Next");
 	ImageIcon blackOIcon = new ImageIcon(".\\Images\\blacko.png");
-	
+	/**
+	 * Constructor for the class
+	 * @param player Int value of either player 1 or 2
+	 * @param queue queue is a BlockingQueue interface
+	 */
 	public SetupBoard(int player, BlockingQueue<Message> queue) {
 		//setup title panel
 		textfield.setBackground(Color.WHITE);
@@ -363,7 +371,9 @@ public class SetupBoard extends JFrame implements Window {
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 	}
 	
-	
+	/**
+	 * This method is for updating the grids which another view class uses to show the player the changes
+	 */
 	public void updateGrid(){
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {

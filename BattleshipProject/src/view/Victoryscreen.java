@@ -10,7 +10,11 @@ import view.Window;
 
 import java.awt.*;
 import java.util.concurrent.BlockingQueue;
-
+/**
+ * 
+ * @author Team 9
+ *	This class is for displaying which player is the winner by popping up another JFrame
+ */
 public class Victoryscreen extends JFrame implements Window {
 	
 	JButton menu = new JButton("Menu");
@@ -18,7 +22,11 @@ public class Victoryscreen extends JFrame implements Window {
 	JPanel title = new JPanel();
 	JLabel textfield = new JLabel();
 	GridBagConstraints gbc = new GridBagConstraints();
-	
+	/**
+	 * Constructor for Victoryscreen
+	 * @param currentPlayer Int value for either player 1 or 2
+	 * @param queue queue is a BlockingQueue interface
+	 */
 	public Victoryscreen(int currentPlayer, BlockingQueue<Message> queue) {
 		textfield.setBackground(Color.BLACK);
         textfield.setFont(new Font("normalFont", Font.BOLD,75));

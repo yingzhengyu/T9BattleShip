@@ -9,6 +9,11 @@ import controller.Message;
 import model.Board;
 import model.Tile;
 import model.TileState;
+/**
+ * 
+ * @author Team 9
+ * This class displays the game board, 8 x 8 grid board for each player
+ */
 public class View extends JFrame implements Window {
 	// Stores a grid of integers to represent the game board
 	int row = 8;
@@ -20,7 +25,13 @@ public class View extends JFrame implements Window {
 	//JPanel middlePanel = new JPanel();
 	JPanel rightPanel = new JPanel();
 	BlockingQueue<Message> queue;
-
+	/**
+	 * View constructor
+	 * @param queue BlockingQueue Interface queue
+	 * @param currentPlayer Int value for either player 1 or 2
+	 * @param player1 Array of tile for player 1
+	 * @param player2 Array of tile for player 2
+	 */
 	public View(BlockingQueue<Message> queue, int currentPlayer, Tile[][] player1, Tile[][] player2) {
 		this.queue = queue;
 		
@@ -44,7 +55,10 @@ public class View extends JFrame implements Window {
 //	public void viewVisible(boolean on) {
 //		this.setVisible(());
 //	}
-	
+	/**
+	 * This method is for hiding the tiles when player switches turn to prevent cheating.
+	 * @param currentPlayer Int value for either player 1 or 2
+	 */
 	public void hideGrid(int currentPlayer) {
 		if (currentPlayer == 1 ) {
 			for (int i = 0; i < row; i++) {
@@ -61,7 +75,10 @@ public class View extends JFrame implements Window {
 			}
 		}
 	}
-
+	/**
+	 * This method works like hideGrid but opposite
+	 * @param currentPlayer Int value for either player 1 or 2
+	 */
 	public void revealGrid(int currentPlayer) {
 		if (currentPlayer == 1) {
 			for (int i = 0; i < row; i++) {
@@ -108,6 +125,9 @@ public class View extends JFrame implements Window {
 
 	// temp method to build the pre-set grids
 	
+	/**
+	 * This method is for regenerating the grids cause of the constant changes
+	 */
 	private void buildGrids() {
 
 		this.leftPanel.setLayout(new GridLayout(8,8,5,5));

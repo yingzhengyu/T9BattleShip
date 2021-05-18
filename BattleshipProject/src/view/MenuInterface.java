@@ -7,7 +7,11 @@ import controller.StartMessage;
 
 import java.awt.*;
 import java.util.concurrent.BlockingQueue;
-
+/**
+ * 
+ * @author Team 9 
+ *	This class is for displaying the first thing the user will see when using the application
+ */
 public class MenuInterface extends JFrame implements Window{
 
     JButton start = new JButton("Start");
@@ -17,7 +21,10 @@ public class MenuInterface extends JFrame implements Window{
     //JLabel background = new JLabel("",img, JLabel.CENTER);
     JLabel textfield = new JLabel();
     GridBagConstraints gbc = new GridBagConstraints();
-
+/**
+ * Constructor for this class
+ * @param queue queue from BlockingQueue interface
+ */
     public MenuInterface(BlockingQueue<Message> queue){
 
         this.setSize(1280,720);

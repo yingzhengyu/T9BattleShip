@@ -7,13 +7,23 @@ import controller.SwitchBoardMessage;
 
 import java.awt.*;
 import java.util.concurrent.BlockingQueue;
-
+/**
+ * 
+ * @author Team 9
+ *	This class is for displaying the next player's turn after a player ends their
+ */
 public class BetweenTurnScreen extends JFrame implements Window {
 	JButton next = new JButton("Next");
 	JPanel title = new JPanel();
 	JLabel textfield = new JLabel();
 	GridBagConstraints gbc = new GridBagConstraints();
 	
+	/**
+	 * Constructor for this class
+	 * @param currentPlayer Int value of either player 1 or 2
+	 * @param queue queue from BlockingQueue interface
+	 * @param view View package for displaying the data
+	 */
 	public BetweenTurnScreen(int currentPlayer, BlockingQueue<Message> queue, View view) {
 		textfield.setBackground(Color.BLACK);
         textfield.setFont(new Font("normalFont", Font.BOLD,75));
