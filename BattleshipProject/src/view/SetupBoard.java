@@ -290,7 +290,6 @@ public class SetupBoard extends JFrame implements Window {
         	else if(player == 2) {
         		try {
                     queue.put(new Next2Message(boats));
-                    
                 } catch (InterruptedException exception) {
                     // do nothing
                 }
