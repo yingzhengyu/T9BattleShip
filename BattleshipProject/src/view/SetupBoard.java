@@ -358,6 +358,9 @@ public class SetupBoard extends JFrame implements Window {
 		this.add(leftPanel, BorderLayout.CENTER);
 		this.add(rightPanel, BorderLayout.EAST);
 		this.setVisible(true);
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 	}
 	
 	
@@ -385,11 +388,6 @@ public class SetupBoard extends JFrame implements Window {
 		
 
 	}
-
-//	 public static void main(String[] args) {
-//		 BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
-//		 SetupBoard s = new SetupBoard(1,queue);
-//	    }
 
 }
 
