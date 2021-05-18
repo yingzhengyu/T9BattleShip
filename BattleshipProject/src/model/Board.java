@@ -5,6 +5,11 @@ import java.util.concurrent.BlockingQueue;
 
 import controller.Message;
 import view.View;
+/**
+ * Board class stores a 2D array of Tiles that will be used to represent the model of each player's game board.
+ * @author Group 9
+ *
+ */
 
 public class Board {
 	
@@ -17,25 +22,12 @@ public class Board {
 	private ArrayList<Boat> player2Boats = new ArrayList<>();
 	private BlockingQueue<Message> queue;
 	
-	public void updateGrid(char x, int y) {
-		// converting char ascii into integer 1-8
-		int charAscii = x;
-		charAscii -= 97;
-		y--; 	// incrementing y to correct position on grid
-		
-		// 0 = empty, not hit
-		// 1 = empty, hit
-		// 2 = occupied, not hit
-		// 3 = occupied, hit
-
-//		// if the tile has not been hit, we change the status to hit by adding one
-//		if (this.grid[charAscii][y] == 0 || this.grid[charAscii][y] == 2) {
-//			this.grid[charAscii][y]++;
-//		}
-//		// Observer that notifies the view whenever changes occur to the model
-//		View.printGrid(grid);
-	}
-	
+	/**
+	 * 
+	 * @param queue BlockingQueue that will be instantiated at runtime and store messages that are sent to the Controller
+	 * @param p1 List of boats that belong to Player 1
+	 * @param p2 List of boats that belong to Player 2
+	 */
 	public Board(BlockingQueue<Message> queue, ArrayList<Boat> p1, ArrayList<Boat> p2) {
 		this.queue = queue;
 		player1Boats = p1;
@@ -72,7 +64,35 @@ public class Board {
 			}	
 		}
 	}
+	/**
+	 * Converts a string input of attack coordinates into a position on the 2D array
+	 * @param x X position to be attacked (A - G)
+	 * @param y Y position to be attacked (1 - 7)
+	 */
+	public void updateGrid(char x, int y) {
+		// converting char ascii into integer 1-8
+		int charAscii = x;
+		charAscii -= 97;
+		y--; 	// incrementing y to correct position on grid
+		
+		// 0 = empty, not hit
+		// 1 = empty, hit
+		// 2 = occupied, not hit
+		// 3 = occupied, hit
 
+//		// if the tile has not been hit, we change the status to hit by adding one
+//		if (this.grid[charAscii][y] == 0 || this.grid[charAscii][y] == 2) {
+//			this.grid[charAscii][y]++;
+//		}
+//		// Observer that notifies the view whenever changes occur to the model
+//		View.printGrid(grid);
+	}
+
+	/**
+	 * Returns The grid of the given player
+	 * @param Player The player that owns the grid to be returned
+	 * @return 2D grid of the given player 
+	 */
 	public Tile[][] getGrid(int player) {
 		if(player == 1) {
 			return player1Grid;
@@ -82,11 +102,17 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Gets the current player
+	 * @return Returns current player as an integer (1 or 2)
+	 */
 	public int getCurrentPlayer() {
 		return this.currentPlayer;
 	}
 	
-	// switches the current player from 1 to 2 or 2 to 1 
+	/**
+	 * Flips current player from 1 to 2, used to switch turns
+	 */
 	public void updateCurrentPlayer() {
 		if (this.currentPlayer == 1) {
 			this.currentPlayer = 2;
@@ -96,6 +122,11 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Gets the list of boats belonging to a given player
+	 * @param player The player whose boats are to be retrieved
+	 * @return ArrayList of boats that belong to the given player
+	 */
 	public ArrayList<Boat> getBoatList(int player){
 		if(player == 1) {
 			return player1Boats;
@@ -157,6 +188,10 @@ public class Board {
 //		}
 //	}
 	
+	/**
+	 * Checks for victory of either player
+	 * @return Returns false if neither player has won, else returns true if currentPlayer has won
+	 */
 	public boolean checkVictory() {
 		boolean state = true;
 		if (currentPlayer == 1) {
