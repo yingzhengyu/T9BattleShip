@@ -45,6 +45,7 @@ public class Controller {
 				controller.mainLoop();
 			}
 			
+			
 			else if(message.getClass() == Next1Message.class) {
 				Next1Message nextMessage = (Next1Message) message;
 				gameboard.setPlayerBoat(1, nextMessage.getBoat());
