@@ -7,7 +7,11 @@ import model.Board;
 import model.Boat;
 import view.*;
 
-
+/**
+ * 
+ * @author Team 9
+ *	This class is for running the application 
+ */
 public class App {
 	public static void main(String[] args) {
 		BlockingQueue<Message> queue = new LinkedBlockingQueue<>();

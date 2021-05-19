@@ -11,17 +11,29 @@ import model.Board;
 import model.Boat;
 import model.Tile;
 import view.*;
-
+/**
+ * 
+ * @author Team 9
+ *	Class is for handling data and messages
+ */
 public class Controller {
 	BlockingQueue<Message> queue;
 	Board gameboard;
 	view.Window window;
-
+	/**
+	 * Controller constructor
+	 * @param queue BlockingQueue of Message
+	 * @param gameboard Board class instance
+	 * @param window Window
+	 */
 	public Controller(BlockingQueue<Message> queue, Board gameboard, view.Window window) {
 		this.queue = queue;
 		this.gameboard = gameboard;
 		this.window = window;
 	}
+	/**
+	 * mainLoop is a method used for handling events from application
+	 */
 	public void mainLoop() {
 		while (((Component) window).isDisplayable()) {
 			Message message = null;
@@ -146,7 +158,10 @@ public class Controller {
 			}
 		}
 	}
-	
+	/**
+	 * This method is switching what the players see when a turn ends
+	 * @param view View
+	 */
 	public void changeTurns(View view) {
 		this.gameboard.updateCurrentPlayer();
 		view.hideGrid(gameboard.getCurrentPlayer());

@@ -1,9 +1,12 @@
 package controller;
-
+/**
+ * 
+ * @author Team 9
+ *	BoatMessage using Message interface
+ */
 public class BoatMessage implements Message{
 	int[] fourTiltBoat = new int [3]; // 0,1,2,3 element so health is 4
 	int[] fiveTiltBoat = new int [4];
-	
 	
 	public int[] getFourTiltBoat() {
 		return fourTiltBoat;
