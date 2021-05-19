@@ -48,7 +48,7 @@ public class MenuInterface extends JFrame implements Window{
         title.add(textfield);
         title.setOpaque(false);
 
-        start.setFont(new Font("Ink Free", Font.PLAIN, 50));
+        start.setFont(new Font("normalFont", Font.PLAIN, 50));
         start.setBounds(0,0,200,100);
         start.addActionListener(e -> {
             try {
@@ -58,7 +58,7 @@ public class MenuInterface extends JFrame implements Window{
             }
         });
 
-        setting.setFont(new Font("Ink Free", Font.PLAIN, 50));
+        setting.setFont(new Font("normalFont", Font.PLAIN, 50));
         setting.setBounds(0,0,200,100);
         
         
