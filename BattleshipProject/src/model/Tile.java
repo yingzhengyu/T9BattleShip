@@ -45,13 +45,6 @@ public class Tile extends JButton implements ActionListener {
  */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// test, just flips the colors back and forth on button press
-		//		if (this.getIcon() == redHitIcon) {
-		//			this.setIcon(blackHitIcon);
-		//		}
-		//		else if (this.getIcon() == blackHitIcon){
-		//			this.setIcon(redHitIcon);
-		//		}
 		try {
 			Message message = new AttackMessage(this);
 			queue.put(message);

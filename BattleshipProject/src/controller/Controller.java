@@ -48,10 +48,6 @@ public class Controller {
 			
 			if (message.getClass() == StartMessage.class) {
 				((Window)window).dispose();
-//				View view = new View(queue, gameboard.getCurrentPlayer(), gameboard.getGrid(1), gameboard.getGrid(2));
-//				BetweenTurnScreen between = new BetweenTurnScreen(gameboard.getCurrentPlayer(), queue, view);
-//				Controller controller = new Controller(queue, gameboard, between);
-//				controller.mainLoop();
 				SetupBoard player1Setup = new SetupBoard(1, queue); 
 				Controller controller = new Controller(queue, gameboard, player1Setup);
 				controller.mainLoop();
@@ -79,7 +75,6 @@ public class Controller {
 			}
 			
 			else if (message.getClass() == AttackMessage.class) {
-				//View view = (View) window;
 				AttackMessage attackMessage = (AttackMessage) message;
 				Tile tile = attackMessage.getTile();
 				tile.attacked();

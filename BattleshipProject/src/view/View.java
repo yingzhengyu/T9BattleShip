@@ -15,14 +15,13 @@ import model.TileState;
  * This class displays the game board, 8 x 8 grid board for each player
  */
 public class View extends JFrame implements Window {
-	// Stores a grid of integers to represent the game board
+	// Stores a grid of tiles to represent the game board
 	int row = 8;
 	int column = 8;
 	Tile[][] leftGrid = new Tile[row][column];
 	Tile[][] rightGrid = new Tile[row][column];
 	JPanel outerPanel = new JPanel(new GridLayout(1,2,60,5));
 	JPanel leftPanel = new JPanel();
-	//JPanel middlePanel = new JPanel();
 	JPanel rightPanel = new JPanel();
 	BlockingQueue<Message> queue;
 	/**
@@ -52,9 +51,6 @@ public class View extends JFrame implements Window {
 	    this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 	}
 
-//	public void viewVisible(boolean on) {
-//		this.setVisible(());
-//	}
 	/**
 	 * This method is for hiding the tiles when player switches turn to prevent cheating.
 	 * @param currentPlayer Int value for either player 1 or 2
@@ -95,35 +91,6 @@ public class View extends JFrame implements Window {
 			}
 		}
 	}
-
-	
-	// general method, builds empty tiles
-//	private void buildGrids() {
-//
-//		this.leftPanel.setLayout(new GridLayout(8,8,5,5));
-//
-//		for (int i = 0; i <= 7; i++) {
-//			for (int j = 0; j <= 7; j++) {
-//				leftGrid[i][j] = new Tile(this.queue);
-//				leftPanel.add(leftGrid[i][j]);
-//			}
-//		}
-//		this.outerPanel.add(leftPanel);
-//
-//		this.rightPanel.setLayout(new GridLayout(8,8,5,5));
-//
-//		for (int i = 0; i <= 7; i++) {
-//			for (int j = 0; j <= 7; j++) {
-//				rightGrid[i][j] = new Tile(this.queue);
-//				rightPanel.add(rightGrid[i][j]);
-//			}
-//		}
-//		this.outerPanel.add(rightPanel);
-//
-//		this.add(this.outerPanel);
-//	}
-
-	// temp method to build the pre-set grids
 	
 	/**
 	 * This method is for regenerating the grids cause of the constant changes
